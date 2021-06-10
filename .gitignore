@@ -1,15 +1,40 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
-*.so
 *.dylib
+*.so
 
 # Test binary, built with `go test -c`
 *.test
 
+# Log Files
+**/log.json
+**/error_log.json
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+__debug_bin
+
+# MacOS
+.DS_Store
+
+# Go releaser artifacts
+**/dist
+
+reports/
+
+.scannerwork/
+
+# Ignore JetBrains stuff
+*.idea
