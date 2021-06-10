@@ -1,0 +1,13 @@
+FROM alpine as builder
+
+# Install SSL ca certificates.
+# Ca-certificates is required to call HTTPS endpoints.
+RUN apk update && apk add --no-cache ca-certificates && update-ca-certificates
+
+FROM scratch
+
+WORKDIR /app
+ENTRYPOINT ["./event-indexer"]
+CMD ["serve"]
+
+COPY event-indexer /app/

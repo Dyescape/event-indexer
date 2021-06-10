@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine as builder
+FROM alpine as builder
 
 # To fix go get and build with cgo
 RUN apk add --no-cache --virtual .build-deps \

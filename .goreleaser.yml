@@ -6,6 +6,16 @@ builds:
   - env:
       - CGO_ENABLED=0
 
+dockers:
+  - image_templates:
+      - "dyescape/event-indexer:latest"
+      - "dyescape/event-indexer:v{{ .Major }}"
+      - "dyescape/event-indexer:v{{ .Major }}.{{ .Minor }}"
+      - "dyescape/event-indexer:{{ .Tag }}"
+    build_flag_templates:
+      - "--label=GIT_TAG={{ .Tag }}"
+    dockerfile: Dockerfile.goreleaser
+
 archives:
   - replacements:
       darwin: Darwin
