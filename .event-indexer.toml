@@ -2,4 +2,5 @@
     [consumer.kafka]
         address = "kafka:9092"
         topic = "events"
+        group = "dyescape_minecraft"
         partition = 0
