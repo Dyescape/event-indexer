@@ -6,6 +6,7 @@
 
 # Unignore important files without extension
 !Dockerfile
+!Makefile
 
 # Unignore all dirs
 !*/
