@@ -15,7 +15,7 @@ func TestInitConfig(t *testing.T) {
 		prop string
 		exp  interface{}
 	}{
-		{"consumer.kafka.address", "kafka:9092"},
+		{"consumer.kafka.address", []interface{}{"kafka:9092"}},
 		{"consumer.kafka.topic", "events"},
 		{"consumer.kafka.partition", int64(0)},
 	}

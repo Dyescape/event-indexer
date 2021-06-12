@@ -32,6 +32,6 @@ FROM scratch
 
 WORKDIR /app
 ENTRYPOINT ["./event-indexer"]
-CMD ["run"]
+CMD ["consume"]
 
 COPY --from=builder /build/event-indexer /app/

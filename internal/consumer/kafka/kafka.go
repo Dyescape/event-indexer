@@ -2,20 +2,22 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	"time"
+
+	"github.com/Dyescape/event-indexer/internal/elastic"
 
 	"github.com/Shopify/sarama"
 	"github.com/ThreeDotsLabs/watermill"
 	"github.com/ThreeDotsLabs/watermill-kafka/v2/pkg/kafka"
 	"github.com/ThreeDotsLabs/watermill/message"
-
-	"log"
 )
 
 type Kafka struct {
 	Brokers []string
 	Topic   string
 	Group   string
+	Elastic *elastic.ElasticSearchClient
 }
 
 func (k *Kafka) Consume() {
@@ -40,7 +42,7 @@ func (k *Kafka) Consume() {
 		panic(err)
 	}
 
-	process(messages)
+	k.process(messages)
 }
 
 func (k *Kafka) PublishTestMessages() {
@@ -68,9 +70,13 @@ func (k *Kafka) PublishTestMessages() {
 	}
 }
 
-func process(messages <-chan *message.Message) {
+func (k *Kafka) process(messages <-chan *message.Message) {
 	for msg := range messages {
-		log.Printf("received message: %s, payload: %s", msg.UUID, string(msg.Payload))
+		err := k.Elastic.Index(string(msg.Payload))
+		if err != nil {
+			fmt.Println("Failed to index event: " + err.Error())
+			continue
+		}
 
 		// we need to Acknowledge that we received and processed the message,
 		// otherwise, it will be resent over and over again.

@@ -1,6 +1,15 @@
 [consumer]
     [consumer.kafka]
-        address = "kafka:9092"
+        address = [
+            "kafka:9092"
+        ]
         topic = "events"
         group = "dyescape_minecraft"
         partition = 0
+
+[elasticsearch]
+    address = [
+        "http://elastic:9200"
+    ]
+    index = "minecraft-events"
+    refresh = "false"
