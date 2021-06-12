@@ -1,10 +1,9 @@
-FROM alpine as builder
+FROM golang:1.16-alpine as builder
 
 # To fix go get and build with cgo
 RUN apk add --no-cache --virtual .build-deps \
     bash \
     gcc \
-    git \
     musl-dev \
     ca-certificates
 
@@ -33,6 +32,6 @@ FROM scratch
 
 WORKDIR /app
 ENTRYPOINT ["./event-indexer"]
-CMD ["serve"]
+CMD ["run"]
 
 COPY --from=builder /build/event-indexer /app/

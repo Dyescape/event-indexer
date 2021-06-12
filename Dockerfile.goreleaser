@@ -8,6 +8,6 @@ FROM scratch
 
 WORKDIR /app
 ENTRYPOINT ["./event-indexer"]
-CMD ["serve"]
+CMD ["run"]
 
 COPY event-indexer /app/

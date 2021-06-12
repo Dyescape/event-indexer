@@ -1,0 +1,5 @@
+[consumer]
+    [consumer.kafka]
+        address = "kafka:9092"
+        topic = "events"
+        partition = 0
